@@ -1,6 +1,6 @@
 import NextAuth from 'next-auth';
 import Google from 'next-auth/providers/google';
-import { getGuest } from './data-service';
+import { getGuest, createGuest } from './data-service';
 
 const authConfig = {
     providers: [
