@@ -1,8 +1,11 @@
+'use client';
+
 import React from 'react';
 import { updateGuest } from '../_lib/actions';
+import { useFormStatus } from 'react-dom';
 
 function ProfileForm({ guest, children }) {
-    const { fullName, email, nationality, nationalID } = guest;
+    const { fullName, email, nationality, nationalID, countryFlag } = guest;
     return (
         <form
             action={updateGuest}
@@ -51,11 +54,22 @@ function ProfileForm({ guest, children }) {
             </div>
 
             <div className='flex justify-end items-center gap-6'>
-                <button className='bg-accent-500 px-8 py-4 text-primary-800 font-semibold hover:bg-accent-600 transition-all disabled:cursor-not-allowed disabled:bg-gray-500 disabled:text-gray-300'>
-                    Update profile
-                </button>
+                <Button />
             </div>
         </form>
+    );
+}
+
+function Button() {
+    const { pending } = useFormStatus();
+
+    return (
+        <button
+            className='bg-accent-500 px-8 py-4 text-primary-800 font-semibold hover:bg-accent-600 transition-all disabled:cursor-not-allowed disabled:bg-gray-500 disabled:text-gray-300'
+            disabled={pending}
+        >
+            {pending ? 'Updating...' : 'Update profile'}
+        </button>
     );
 }
 
